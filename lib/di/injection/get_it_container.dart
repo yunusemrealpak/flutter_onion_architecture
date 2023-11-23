@@ -15,3 +15,5 @@ final class GetItContainer {
 
   static T instance<T extends Object>() => _di.get<T>();
 }
+
+T di<T extends Object>() => GetItContainer.instance<T>();
