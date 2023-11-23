@@ -1,0 +1,1 @@
+dart run easy_localization:generate -S assets/i10n -f keys -O lib/_core/localization -o locale_keys.g.dart
