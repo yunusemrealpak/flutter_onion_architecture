@@ -1,5 +1,6 @@
 import 'package:flutter_onion_architecture/common/utils/record_utils.dart';
 import 'package:flutter_onion_architecture/core/application/dto/product_dto.dart';
+import 'package:flutter_onion_architecture/core/application/exception/validation_exception.dart';
 import 'package:flutter_onion_architecture/core/application/interfaces/repositories/i_product_repository.dart';
 import 'package:flutter_onion_architecture/core/application/wrappers/service_response.dart';
 import 'package:injectable/injectable.dart';
@@ -17,6 +18,12 @@ final class CreateProductCommandHandler implements IRequestHandler<CreateProduct
 
   @override
   Future<ServiceResponse<ProductDto>> handle(CreateProductCommand request) async {
+    // Validation
+    final (isValid, message) = request.hasValidate();
+    if (!isValid) {
+      return ServiceResponse.failure(ValidationException(message: message));
+    }
+
     final product = _mapper.map<Product>(request);
     final result = await _productRepository.create(product);
 

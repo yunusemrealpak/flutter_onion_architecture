@@ -15,6 +15,27 @@ class MapperGenerator extends GeneratorForAnnotation<Mapper> {
       );
     }
 
+    final constant = annotation.objectValue;
+    final mapperFieldObjects = constant.getField('fields')?.toListValue() ?? [];
+
+    final mapperFields = mapperFieldObjects
+        .map(
+          (e) => MapperField(
+            e.getField('name')!.toStringValue()!,
+            from: e.getField('from')?.toStringValue(),
+            ignore: e.getField('ignore')?.toBoolValue() ?? false,
+          ),
+        )
+        .toList();
+
+    for (var field in mapperFields) {
+      if (field.name.isEmpty) {
+        throw InvalidGenerationSourceError(
+          'You must provide a `name` parameter of MapperField.',
+        );
+      }
+    }
+
     final classElement = element;
     final classFields = classElement.fields.map((e) {
       if (e.isStatic || e.isSynthetic) return Field.static();
@@ -44,6 +65,42 @@ class MapperGenerator extends GeneratorForAnnotation<Mapper> {
 
     final reverseMap = annotation.read('reverseMap').boolValue;
 
+    if (mapperFields.isNotEmpty) {
+      for (var field in mapperFields) {
+        // if (!field.ignore && field.from == null) {
+        //   throw InvalidGenerationSourceError(
+        //     'You must provide a `from` parameter of MapperField.',
+        //   );
+        // }
+
+        // if (!field.ignore && !classFields.any((element) => element.name == field.from)) {
+        //   throw InvalidGenerationSourceError(
+        //     'The `from` parameter of MapperField must be a field of the class.',
+        //   );
+        // }
+
+        // if (!field.ignore && !mappingFields.any((element) => element.name == field.name)) {
+        //   throw InvalidGenerationSourceError(
+        //     'The `name` parameter of MapperField must be a field of the `as` class.',
+        //   );
+        // }
+
+        if (field.ignore) {
+          classFields.removeWhere((element) => element.name == field.name);
+          mappingFields.removeWhere((element) => element.name == field.from);
+        } else {
+          final classField = classFields.firstWhere((element) => element.name == field.name);
+          final mappingField = mappingFields.firstWhere((element) => element.name == field.from);
+
+          final field1 = classField.copyWith(name: field.name);
+          classFields[classFields.indexOf(classField)] = field1;
+
+          final field2 = mappingField.copyWith(name: field.from);
+          mappingFields[mappingFields.indexOf(mappingField)] = field2;
+        }
+      }
+    }
+
     final config = DependencyConfig(
       from: classElement.displayName,
       fromPath: element.source.uri.toString(),
@@ -57,54 +114,3 @@ class MapperGenerator extends GeneratorForAnnotation<Mapper> {
     return config;
   }
 }
-
-
-
-
-// @override
-//   FutureOr<String?> generate(LibraryReader library, BuildStep buildStep) async {
-//     final elements = <ClassElement>{};
-
-//     for (var clazz in library.classes) {
-//       if (_mapperChecker.hasAnnotationOfExact(clazz)) {
-//         elements.add(clazz);
-//         print('Anotasyonlu sınıflar bulundu: ${clazz.displayName}');
-//         print('Kod üretiliyor: ${clazz.displayName}'); // Kod üretimi için loglama
-//         print('Path üretiliyor: ${clazz.source.uri}'); // Kod üretimi için loglama
-
-//         _generatedFiles.add(clazz.displayName);
-
-//         print('Üretilenler: ${_generatedFiles.join(', ')}'); // Kod üretimi için loglama
-//       }
-//     }
-
-//     return elements.map((e) {
-//       final className = e.displayName;
-//       final dependency = DependencyConfig(className, e.source.uri.toString(), to, reverseMap)
-//       print('Json üretiliyor: $className'); // Kod üretimi için loglama
-//       return """
-// import '${e.source.uri}';
-// final ${className.toLowerCase()}Instance = $className();
-// """;
-//     }).join('');
-
-    // // Proje içindeki tüm kaynakları tara ve @mapper anotasyonlu sınıfları bul
-    // await for (final id in buildStep.findAssets(Glob('lib/**/*.dart'))) {
-    //   print('Dosya taranıyor: ${id.path}'); // Taranan dosya için loglama
-    //   final lib = await buildStep.resolver.libraryFor(id);
-    //   final reader = LibraryReader(lib);
-    //   final annotatedElements = reader.annotatedWith(const TypeChecker.fromRuntime(Mapper)).map((e) => e.element).whereType<ClassElement>();
-    //   elements.addAll(annotatedElements);
-
-    //   if (annotatedElements.isNotEmpty) {
-    //     print('Anotasyonlu sınıflar bulundu: ${annotatedElements.map((e) => e.displayName).join(', ')}');
-    //   }
-    // }
-
-    // // Anotasyonlu sınıflar için kod oluştur
-    // return elements.map((e) {
-    //   final className = e.displayName;
-    //   print('Kod üretiliyor: $className'); // Kod üretimi için loglama
-    //   return "import '${e.source?.uri}';\nfinal ${className.toLowerCase()}Instance = $className();";
-    // }).join('\n\n');
- // }

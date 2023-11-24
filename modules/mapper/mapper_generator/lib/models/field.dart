@@ -27,4 +27,14 @@ final class Field {
   String toJson() => json.encode(toMap());
 
   factory Field.fromJson(String source) => Field.fromMap(json.decode(source) as Map<String, dynamic>);
+
+  Field copyWith({
+    String? name,
+    String? type,
+  }) {
+    return Field(
+      name: name ?? this.name,
+      type: type ?? this.type,
+    );
+  }
 }

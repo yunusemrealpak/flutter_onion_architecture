@@ -1,17 +1,3 @@
-# builders:
-#   # mapper_generator:
-#   #   import: "package:mapper_generator/builder.dart"
-#   #   builder_factories: ["todoReporter"]
-#   #   build_extensions: {".dart": [".todo_reporter.g.part"]}
-#   #   auto_apply: dependents
-#   #   build_to: cache
-#   #   applies_builders: ["source_gen|combining_builder"]
-#   mapper_generator:mapperBuilder:
-#         import: "package:mapper_generator/builder.dart"
-#         builder_factories: ["mapperBuilder"]
-#         build_extensions: {".dart": [".config.dart"]}
-#         auto_apply: dependents
-
 builders:
   mapper_builder_json:
     import: "package:mapper_generator/builder.dart"
@@ -20,12 +6,6 @@ builders:
     auto_apply: dependents
     runs_before: ["mapper_builder_json|mapper_builder"]
     build_to: cache
-  # mapper_entity_builder:
-  #   import: "package:mapper_generator/builder.dart"
-  #   builder_factories: ["mapperEntityBuilder"]
-  #   build_extensions: { ".dart": [".mapper.dart"] }
-  #   auto_apply: dependents
-  #   build_to: source
   mapper_builder:
     import: "package:mapper_generator/builder.dart"
     builder_factories: ["mapperBuilder"]

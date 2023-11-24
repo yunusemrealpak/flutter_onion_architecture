@@ -8,6 +8,7 @@ environment:
 
 # Add regular dependencies here.
 dependencies:
+  analyzer: ^6.2.0
   dart_style: ^2.3.3
   glob: ^2.1.2
   build: ^2.4.1

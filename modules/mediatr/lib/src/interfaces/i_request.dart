@@ -1,1 +1,3 @@
-abstract interface class IRequest<T> {}
+abstract class IRequest<T> {
+  (bool, String?) hasValidate() => (true, null);
+}

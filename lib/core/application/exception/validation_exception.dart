@@ -1,5 +1,5 @@
-final class ValidationException implements Exception {
-  final String message;
+import 'package:busenet/busenet.dart';
 
-  ValidationException([this.message = "Validation Error"]);
+final class ValidationException extends Failure {
+  ValidationException({super.message = "Validation Error"});
 }

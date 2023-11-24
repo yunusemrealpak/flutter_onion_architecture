@@ -1,4 +1,4 @@
-import 'failure.dart';
+import 'package:busenet/busenet.dart';
 
 final class ServiceResponse<T> {
   final T? data;

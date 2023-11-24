@@ -1,4 +1,4 @@
-import 'package:flutter_onion_architecture/core/application/wrappers/failure.dart';
+import 'package:busenet/busenet.dart';
 import 'package:flutter_onion_architecture/presentation/common/base_cubit_state.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 

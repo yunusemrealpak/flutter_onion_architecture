@@ -39,7 +39,7 @@ class AutoMapperTemplate {
       ..writeln('  @override')
       ..writeln('  T map<T>(dynamic source) {')
       ..writeln('    final mapper = _mappers.firstWhere(')
-      ..writeln('      (mapper) => mapper.from == source.runtimeType.toString(),')
+      ..writeln('      (mapper) => mapper.from == source.runtimeType.toString() && mapper.to == T.toString(),')
       ..writeln('      orElse: () => throw Exception(')
       ..writeln('          \'Mapper not found for \${source.runtimeType.toString()}\'),')
       ..writeln('    );')

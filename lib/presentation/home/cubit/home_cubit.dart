@@ -17,9 +17,9 @@ final class HomeCubit extends BaseCubit<HomeState> {
 
     final response = await _mediator.send<CreateProductCommand, ServiceResponse<ProductDto>>(
       CreateProductCommand(
-        name: 'Product 1',
+        productName: 'Product 1',
         price: 1000,
-        description: 'Description 1',
+        title: 'Description 1',
       ),
     );
 
