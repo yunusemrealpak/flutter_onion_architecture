@@ -28,6 +28,7 @@ environment:
 # the latest version available on pub.dev. To see which dependencies have newer
 # versions available, run `flutter pub outdated`.
 dependencies:
+  auto_mappr_annotation: ^2.1.0
   busenet: ^0.8.2
   cupertino_icons: ^1.0.2
   envied: ^0.5.2
@@ -37,13 +38,14 @@ dependencies:
   freezed_annotation: ^2.4.1
   get_it: ^7.6.4
   injectable: ^2.3.2
-  mapper_annotation:
-    path: ./modules/mapper/mapper_annotation/
+  # mapper_annotation:
+  #   path: ./modules/mapper/mapper_annotation/
   mediatr:
     path: ./modules/mediatr/
   path_provider: ^2.1.1
 
 dev_dependencies:
+  auto_mappr: ^2.1.1
   build_runner: null
   envied_generator: ^0.5.2
   flutter_lints: ^2.0.0
@@ -51,8 +53,8 @@ dev_dependencies:
     sdk: flutter
   freezed: ^2.4.5
   injectable_generator: ^2.4.1
-  mapper_generator:
-    path: ./modules/mapper/mapper_generator/
+  # mapper_generator:
+  #   path: ./modules/mapper/mapper_generator/
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec

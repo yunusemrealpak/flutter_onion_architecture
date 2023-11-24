@@ -18,8 +18,7 @@ final class ProductRepository extends GenericRepository<Product> implements IPro
 
   @override
   EitherFuture<Product> create(Product entity) async {
-    // TODO: implement create
-    throw UnimplementedError();
+    return right(entity);
   }
 
   @override
