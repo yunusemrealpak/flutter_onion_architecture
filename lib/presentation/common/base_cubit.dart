@@ -5,7 +5,25 @@ import 'package:flutter_onion_architecture/common/extensions/context_extensions.
 
 import '../../common/constants/app_constants.dart';
 
-abstract base class BaseCubit<T> extends Cubit<T> {
+/// This is an abstract base class for Cubit classes in the application.
+/// It provides common functionality and methods that can be used by
+/// subclasses.
+///
+/// Parameters:
+/// - T: The type of state that the Cubit emits.
+///
+/// Properties:
+/// - context: The BuildContext object used for showing notifications.
+///
+/// Methods:
+/// - setContext(BuildContext context): Sets the BuildContext object.
+/// - safeEmit(T state): Emits the given state if the Cubit is not closed.
+/// - showNotification(String message, {bool isError = false, Duration duration = const Duration(milliseconds: 4000)}):
+///   Shows a notification using the ScaffoldMessenger.
+/// - setError(String? message): Shows an error notification with the given message.
+/// - setLoading(bool loading): Sets the loading state of the Cubit.
+/// - resetFailure(): Resets the failure state of the Cubit.
+abstract class BaseCubit<T> extends Cubit<T> {
   BaseCubit(super.initialState);
 
   late BuildContext context;
@@ -40,6 +58,16 @@ abstract base class BaseCubit<T> extends Cubit<T> {
     showNotification(message ?? '', isError: true);
   }
 
+  /// Sets the loading state of the home cubit.
+  ///
+  /// This method updates the loading state of the home cubit by
+  /// modifying the `isLoading` property of the current state.
+  /// The new state is then emitted using the `safeEmit` method.
+  ///
+  /// Parameters:
+  /// - loading: A boolean value indicating whether the home is loading or not.
+  ///
+  /// Returns: void
   void setLoading(bool loading) {}
 
   void resetFailure() {

@@ -14,6 +14,7 @@ class HomeState extends BaseCubitState with _$HomeState {
 
     ///
     @Default([]) List<ProductDto> products,
+    ProductDto? product,
   }) = _HomeState;
   factory HomeState.initial() => const HomeState();
 }

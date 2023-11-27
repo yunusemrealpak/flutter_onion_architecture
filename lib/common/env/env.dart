@@ -5,13 +5,16 @@ import 'package:flutter_onion_architecture/common/config/app_config.dart';
 
 part 'env.g.dart';
 
+/// A class that provides environment-specific configuration values.
 class AppEnv {
+  /// Returns the API URL based on the current environment.
   static String get apiUrl {
     if (AppConfig.isDebug) return _DevEnv.API_URL;
 
     return _ProdEnv.API_URL;
   }
 
+  /// Returns the OneSignal App ID based on the current environment.
   static String get onesignalAppId {
     if (AppConfig.isDebug) return _DevEnv.ONESIGNAL_APP_ID;
 

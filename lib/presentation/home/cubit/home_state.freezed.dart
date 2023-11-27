@@ -21,6 +21,7 @@ mixin _$HomeState {
 
   ///
   List<ProductDto> get products => throw _privateConstructorUsedError;
+  ProductDto? get product => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $HomeStateCopyWith<HomeState> get copyWith =>
@@ -32,7 +33,11 @@ abstract class $HomeStateCopyWith<$Res> {
   factory $HomeStateCopyWith(HomeState value, $Res Function(HomeState) then) =
       _$HomeStateCopyWithImpl<$Res, HomeState>;
   @useResult
-  $Res call({bool isLoading, Failure? failure, List<ProductDto> products});
+  $Res call(
+      {bool isLoading,
+      Failure? failure,
+      List<ProductDto> products,
+      ProductDto? product});
 }
 
 /// @nodoc
@@ -51,6 +56,7 @@ class _$HomeStateCopyWithImpl<$Res, $Val extends HomeState>
     Object? isLoading = null,
     Object? failure = freezed,
     Object? products = null,
+    Object? product = freezed,
   }) {
     return _then(_value.copyWith(
       isLoading: null == isLoading
@@ -65,6 +71,10 @@ class _$HomeStateCopyWithImpl<$Res, $Val extends HomeState>
           ? _value.products
           : products // ignore: cast_nullable_to_non_nullable
               as List<ProductDto>,
+      product: freezed == product
+          ? _value.product
+          : product // ignore: cast_nullable_to_non_nullable
+              as ProductDto?,
     ) as $Val);
   }
 }
@@ -77,7 +87,11 @@ abstract class _$$HomeStateImplCopyWith<$Res>
       __$$HomeStateImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({bool isLoading, Failure? failure, List<ProductDto> products});
+  $Res call(
+      {bool isLoading,
+      Failure? failure,
+      List<ProductDto> products,
+      ProductDto? product});
 }
 
 /// @nodoc
@@ -94,6 +108,7 @@ class __$$HomeStateImplCopyWithImpl<$Res>
     Object? isLoading = null,
     Object? failure = freezed,
     Object? products = null,
+    Object? product = freezed,
   }) {
     return _then(_$HomeStateImpl(
       isLoading: null == isLoading
@@ -108,6 +123,10 @@ class __$$HomeStateImplCopyWithImpl<$Res>
           ? _value._products
           : products // ignore: cast_nullable_to_non_nullable
               as List<ProductDto>,
+      product: freezed == product
+          ? _value.product
+          : product // ignore: cast_nullable_to_non_nullable
+              as ProductDto?,
     ));
   }
 }
@@ -118,7 +137,8 @@ class _$HomeStateImpl implements _HomeState {
   const _$HomeStateImpl(
       {this.isLoading = false,
       this.failure,
-      final List<ProductDto> products = const []})
+      final List<ProductDto> products = const [],
+      this.product})
       : _products = products;
 
   @override
@@ -140,8 +160,11 @@ class _$HomeStateImpl implements _HomeState {
   }
 
   @override
+  final ProductDto? product;
+
+  @override
   String toString() {
-    return 'HomeState(isLoading: $isLoading, failure: $failure, products: $products)';
+    return 'HomeState(isLoading: $isLoading, failure: $failure, products: $products, product: $product)';
   }
 
   @override
@@ -152,12 +175,13 @@ class _$HomeStateImpl implements _HomeState {
             (identical(other.isLoading, isLoading) ||
                 other.isLoading == isLoading) &&
             (identical(other.failure, failure) || other.failure == failure) &&
-            const DeepCollectionEquality().equals(other._products, _products));
+            const DeepCollectionEquality().equals(other._products, _products) &&
+            (identical(other.product, product) || other.product == product));
   }
 
   @override
   int get hashCode => Object.hash(runtimeType, isLoading, failure,
-      const DeepCollectionEquality().hash(_products));
+      const DeepCollectionEquality().hash(_products), product);
 
   @JsonKey(ignore: true)
   @override
@@ -170,7 +194,8 @@ abstract class _HomeState implements HomeState {
   const factory _HomeState(
       {final bool isLoading,
       final Failure? failure,
-      final List<ProductDto> products}) = _$HomeStateImpl;
+      final List<ProductDto> products,
+      final ProductDto? product}) = _$HomeStateImpl;
 
   @override
   bool get isLoading;
@@ -180,6 +205,8 @@ abstract class _HomeState implements HomeState {
 
   ///
   List<ProductDto> get products;
+  @override
+  ProductDto? get product;
   @override
   @JsonKey(ignore: true)
   _$$HomeStateImplCopyWith<_$HomeStateImpl> get copyWith =>

@@ -19,7 +19,17 @@ class HomeView extends StatelessWidget {
           appBar: AppBar(
             title: const Text(''),
           ),
-          body: Container(),
+          body: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              ElevatedButton(
+                onPressed: () {
+                  cubit.createProduct();
+                },
+                child: const Text('Create Product'),
+              ),
+            ],
+          ),
         );
       },
     );

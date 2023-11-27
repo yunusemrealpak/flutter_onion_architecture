@@ -3,6 +3,8 @@ import 'dart:convert';
 
 import 'package:busenet/busenet.dart';
 
+/// ResponseModel class represents the response model used in the network layer.
+/// It extends the BaseResponse class and contains properties such as entity, error, success, message, and status.
 class ResponseModel extends BaseResponse<ResponseModel> {
   dynamic entity;
   dynamic error;
@@ -10,6 +12,7 @@ class ResponseModel extends BaseResponse<ResponseModel> {
   String? message;
   int? status;
 
+  /// Constructs a new ResponseModel instance.
   ResponseModel({
     this.entity,
     this.error,
@@ -28,6 +31,7 @@ class ResponseModel extends BaseResponse<ResponseModel> {
     return ResponseModel.fromMap(json);
   }
 
+  /// Converts the ResponseModel instance to a map.
   Map<String, dynamic> toMap() {
     return <String, dynamic>{
       'entity': entity,
@@ -38,6 +42,7 @@ class ResponseModel extends BaseResponse<ResponseModel> {
     };
   }
 
+  /// Constructs a ResponseModel instance from a map.
   factory ResponseModel.fromMap(Map<String, dynamic> map) {
     return ResponseModel(
       entity: map['entity'] as dynamic,
@@ -48,12 +53,15 @@ class ResponseModel extends BaseResponse<ResponseModel> {
     );
   }
 
+  /// Converts the ResponseModel instance to a JSON string.
   String toJson() => json.encode(toMap());
 
+  /// Constructs a ResponseModel instance from a JSON string.
   factory ResponseModel.fromJson(String source) => ResponseModel.fromMap(
         json.decode(source) as Map<String, dynamic>,
       );
 
+  /// Creates a copy of the ResponseModel instance with the specified properties overridden.
   ResponseModel copyWith({
     dynamic entity,
     dynamic error,

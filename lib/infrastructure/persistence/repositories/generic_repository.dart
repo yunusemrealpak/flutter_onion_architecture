@@ -1,8 +1,6 @@
 import 'package:busenet/busenet.dart';
 import 'package:flutter_onion_architecture/core/application/interfaces/repositories/i_generic_repository.dart';
-import 'package:flutter_onion_architecture/core/application/interfaces/repositories/i_product_repository.dart';
 import 'package:flutter_onion_architecture/core/application/wrappers/typedefs.dart';
-import 'package:flutter_onion_architecture/core/domain/entities/product.dart';
 import 'package:flutter_onion_architecture/infrastructure/persistence/network/app_network_manager.dart';
 import 'package:flutter_onion_architecture/infrastructure/persistence/network/model/app_failure.dart';
 
