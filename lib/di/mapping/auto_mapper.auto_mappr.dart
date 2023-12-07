@@ -9,16 +9,16 @@
 // ignore_for_file: no_leading_underscores_for_library_prefixes
 import 'package:auto_mappr_annotation/auto_mappr_annotation.dart' as _i1;
 
-import '../../core/application/dto/product_dto.dart' as _i4;
-import '../../core/application/features/product/commands/create_product/create_product_command.dart'
+import '../../core/application/dto/post_dto.dart' as _i4;
+import '../../core/application/features/post/commands/create_post/create_post_command.dart'
     as _i2;
-import '../../core/domain/entities/product.dart' as _i3;
+import '../../core/domain/entities/post.dart' as _i3;
 
 /// {@template package:flutter_onion_architecture/di/mapping/auto_mapper.dart}
 /// Available mappings:
-/// - `CreateProductCommand` → `Product`.
-/// - `Product` → `ProductDto`.
-/// - `ProductDto` → `Product`.
+/// - `CreatePostCommand` → `Post`.
+/// - `Post` → `PostDto`.
+/// - `PostDto` → `Post`.
 /// {@endtemplate}
 class $AutoMapper implements _i1.AutoMapprInterface {
   const $AutoMapper();
@@ -33,22 +33,22 @@ class $AutoMapper implements _i1.AutoMapprInterface {
   bool canConvert<SOURCE, TARGET>({bool recursive = true}) {
     final sourceTypeOf = _typeOf<SOURCE>();
     final targetTypeOf = _typeOf<TARGET>();
-    if ((sourceTypeOf == _typeOf<_i2.CreateProductCommand>() ||
-            sourceTypeOf == _typeOf<_i2.CreateProductCommand?>()) &&
-        (targetTypeOf == _typeOf<_i3.Product>() ||
-            targetTypeOf == _typeOf<_i3.Product?>())) {
+    if ((sourceTypeOf == _typeOf<_i2.CreatePostCommand>() ||
+            sourceTypeOf == _typeOf<_i2.CreatePostCommand?>()) &&
+        (targetTypeOf == _typeOf<_i3.Post>() ||
+            targetTypeOf == _typeOf<_i3.Post?>())) {
       return true;
     }
-    if ((sourceTypeOf == _typeOf<_i3.Product>() ||
-            sourceTypeOf == _typeOf<_i3.Product?>()) &&
-        (targetTypeOf == _typeOf<_i4.ProductDto>() ||
-            targetTypeOf == _typeOf<_i4.ProductDto?>())) {
+    if ((sourceTypeOf == _typeOf<_i3.Post>() ||
+            sourceTypeOf == _typeOf<_i3.Post?>()) &&
+        (targetTypeOf == _typeOf<_i4.PostDto>() ||
+            targetTypeOf == _typeOf<_i4.PostDto?>())) {
       return true;
     }
-    if ((sourceTypeOf == _typeOf<_i4.ProductDto>() ||
-            sourceTypeOf == _typeOf<_i4.ProductDto?>()) &&
-        (targetTypeOf == _typeOf<_i3.Product>() ||
-            targetTypeOf == _typeOf<_i3.Product?>())) {
+    if ((sourceTypeOf == _typeOf<_i4.PostDto>() ||
+            sourceTypeOf == _typeOf<_i4.PostDto?>()) &&
+        (targetTypeOf == _typeOf<_i3.Post>() ||
+            targetTypeOf == _typeOf<_i3.Post?>())) {
       return true;
     }
     if (recursive) {
@@ -208,77 +208,75 @@ class $AutoMapper implements _i1.AutoMapprInterface {
   }) {
     final sourceTypeOf = _typeOf<SOURCE>();
     final targetTypeOf = _typeOf<TARGET>();
-    if ((sourceTypeOf == _typeOf<_i2.CreateProductCommand>() ||
-            sourceTypeOf == _typeOf<_i2.CreateProductCommand?>()) &&
-        (targetTypeOf == _typeOf<_i3.Product>() ||
-            targetTypeOf == _typeOf<_i3.Product?>())) {
+    if ((sourceTypeOf == _typeOf<_i2.CreatePostCommand>() ||
+            sourceTypeOf == _typeOf<_i2.CreatePostCommand?>()) &&
+        (targetTypeOf == _typeOf<_i3.Post>() ||
+            targetTypeOf == _typeOf<_i3.Post?>())) {
       if (canReturnNull && model == null) {
         return null;
       }
-      return (_map__i2$CreateProductCommand_To__i3$Product(
-          (model as _i2.CreateProductCommand?)) as TARGET);
+      return (_map__i2$CreatePostCommand_To__i3$Post(
+          (model as _i2.CreatePostCommand?)) as TARGET);
     }
-    if ((sourceTypeOf == _typeOf<_i3.Product>() ||
-            sourceTypeOf == _typeOf<_i3.Product?>()) &&
-        (targetTypeOf == _typeOf<_i4.ProductDto>() ||
-            targetTypeOf == _typeOf<_i4.ProductDto?>())) {
+    if ((sourceTypeOf == _typeOf<_i3.Post>() ||
+            sourceTypeOf == _typeOf<_i3.Post?>()) &&
+        (targetTypeOf == _typeOf<_i4.PostDto>() ||
+            targetTypeOf == _typeOf<_i4.PostDto?>())) {
       if (canReturnNull && model == null) {
         return null;
       }
-      return (_map__i3$Product_To__i4$ProductDto((model as _i3.Product?))
-          as TARGET);
+      return (_map__i3$Post_To__i4$PostDto((model as _i3.Post?)) as TARGET);
     }
-    if ((sourceTypeOf == _typeOf<_i4.ProductDto>() ||
-            sourceTypeOf == _typeOf<_i4.ProductDto?>()) &&
-        (targetTypeOf == _typeOf<_i3.Product>() ||
-            targetTypeOf == _typeOf<_i3.Product?>())) {
+    if ((sourceTypeOf == _typeOf<_i4.PostDto>() ||
+            sourceTypeOf == _typeOf<_i4.PostDto?>()) &&
+        (targetTypeOf == _typeOf<_i3.Post>() ||
+            targetTypeOf == _typeOf<_i3.Post?>())) {
       if (canReturnNull && model == null) {
         return null;
       }
-      return (_map__i4$ProductDto_To__i3$Product((model as _i4.ProductDto?))
-          as TARGET);
+      return (_map__i4$PostDto_To__i3$Post((model as _i4.PostDto?)) as TARGET);
     }
     throw Exception('No ${model.runtimeType} -> $targetTypeOf mapping.');
   }
 
-  _i3.Product _map__i2$CreateProductCommand_To__i3$Product(
-      _i2.CreateProductCommand? input) {
+  _i3.Post _map__i2$CreatePostCommand_To__i3$Post(
+      _i2.CreatePostCommand? input) {
     final model = input;
     if (model == null) {
       throw Exception(
-          r'Mapping CreateProductCommand → Product failed because CreateProductCommand was null, and no default value was provided. '
-          r'Consider setting the whenSourceIsNull parameter on the MapType<CreateProductCommand, Product> to handle null values during mapping.');
+          r'Mapping CreatePostCommand → Post failed because CreatePostCommand was null, and no default value was provided. '
+          r'Consider setting the whenSourceIsNull parameter on the MapType<CreatePostCommand, Post> to handle null values during mapping.');
     }
-    return _i3.Product(
-      name: model.name,
-      price: model.price,
-      stock: model.stock,
+    return _i3.Post();
+  }
+
+  _i4.PostDto _map__i3$Post_To__i4$PostDto(_i3.Post? input) {
+    final model = input;
+    if (model == null) {
+      throw Exception(
+          r'Mapping Post → PostDto failed because Post was null, and no default value was provided. '
+          r'Consider setting the whenSourceIsNull parameter on the MapType<Post, PostDto> to handle null values during mapping.');
+    }
+    return _i4.PostDto(
+      id: model.id,
+      userId: model.userId,
+      title: model.title,
+      body: model.body,
     );
   }
 
-  _i4.ProductDto _map__i3$Product_To__i4$ProductDto(_i3.Product? input) {
+  _i3.Post _map__i4$PostDto_To__i3$Post(_i4.PostDto? input) {
     final model = input;
     if (model == null) {
       throw Exception(
-          r'Mapping Product → ProductDto failed because Product was null, and no default value was provided. '
-          r'Consider setting the whenSourceIsNull parameter on the MapType<Product, ProductDto> to handle null values during mapping.');
+          r'Mapping PostDto → Post failed because PostDto was null, and no default value was provided. '
+          r'Consider setting the whenSourceIsNull parameter on the MapType<PostDto, Post> to handle null values during mapping.');
     }
-    return _i4.ProductDto(
-      name: model.name,
-      price: model.price,
-    );
-  }
-
-  _i3.Product _map__i4$ProductDto_To__i3$Product(_i4.ProductDto? input) {
-    final model = input;
-    if (model == null) {
-      throw Exception(
-          r'Mapping ProductDto → Product failed because ProductDto was null, and no default value was provided. '
-          r'Consider setting the whenSourceIsNull parameter on the MapType<ProductDto, Product> to handle null values during mapping.');
-    }
-    return _i3.Product(
-      name: model.name,
-      price: model.price,
+    return _i3.Post(
+      userId: model.userId,
+      id: model.id,
+      title: model.title,
+      body: model.body,
     );
   }
 }

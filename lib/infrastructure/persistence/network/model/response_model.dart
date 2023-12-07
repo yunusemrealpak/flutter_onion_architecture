@@ -2,13 +2,15 @@
 import 'dart:convert';
 
 import 'package:busenet/busenet.dart';
+import 'package:injectable/injectable.dart';
 
 /// ResponseModel class represents the response model used in the network layer.
 /// It extends the BaseResponse class and contains properties such as entity, error, success, message, and status.
+@singleton
 class ResponseModel extends BaseResponse<ResponseModel> {
   dynamic entity;
   dynamic error;
-  bool? success;
+  bool success;
   String? message;
   int? status;
 
@@ -16,9 +18,11 @@ class ResponseModel extends BaseResponse<ResponseModel> {
   ResponseModel({
     this.entity,
     this.error,
-    this.success,
+    this.success = true,
     this.message,
     this.status,
+    super.statusCode,
+    super.errorType,
   });
 
   @override
@@ -47,7 +51,7 @@ class ResponseModel extends BaseResponse<ResponseModel> {
     return ResponseModel(
       entity: map['entity'] as dynamic,
       error: map['error'] as dynamic,
-      success: map['success'] != null ? map['success'] as bool : null,
+      success: map['success'] != null ? map['success'] as bool : true,
       message: map['message'] != null ? map['message'] as String : null,
       status: map['status'] != null ? map['status'] as int : null,
     );
@@ -83,7 +87,7 @@ class ResponseModel extends BaseResponse<ResponseModel> {
     entity = null;
     error = null;
     status = null;
-    success = null;
+    success = true;
     message = null;
   }
 }

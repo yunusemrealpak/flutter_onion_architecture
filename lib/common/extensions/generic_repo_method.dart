@@ -1,0 +1,4 @@
+enum GenericRepoMethod {
+  getAll,
+  getById,
+}

@@ -20,8 +20,8 @@ mixin _$HomeState {
   Failure? get failure => throw _privateConstructorUsedError;
 
   ///
-  List<ProductDto> get products => throw _privateConstructorUsedError;
-  ProductDto? get product => throw _privateConstructorUsedError;
+  List<PostDto> get posts => throw _privateConstructorUsedError;
+  PostDto? get post => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $HomeStateCopyWith<HomeState> get copyWith =>
@@ -34,10 +34,7 @@ abstract class $HomeStateCopyWith<$Res> {
       _$HomeStateCopyWithImpl<$Res, HomeState>;
   @useResult
   $Res call(
-      {bool isLoading,
-      Failure? failure,
-      List<ProductDto> products,
-      ProductDto? product});
+      {bool isLoading, Failure? failure, List<PostDto> posts, PostDto? post});
 }
 
 /// @nodoc
@@ -55,8 +52,8 @@ class _$HomeStateCopyWithImpl<$Res, $Val extends HomeState>
   $Res call({
     Object? isLoading = null,
     Object? failure = freezed,
-    Object? products = null,
-    Object? product = freezed,
+    Object? posts = null,
+    Object? post = freezed,
   }) {
     return _then(_value.copyWith(
       isLoading: null == isLoading
@@ -67,14 +64,14 @@ class _$HomeStateCopyWithImpl<$Res, $Val extends HomeState>
           ? _value.failure
           : failure // ignore: cast_nullable_to_non_nullable
               as Failure?,
-      products: null == products
-          ? _value.products
-          : products // ignore: cast_nullable_to_non_nullable
-              as List<ProductDto>,
-      product: freezed == product
-          ? _value.product
-          : product // ignore: cast_nullable_to_non_nullable
-              as ProductDto?,
+      posts: null == posts
+          ? _value.posts
+          : posts // ignore: cast_nullable_to_non_nullable
+              as List<PostDto>,
+      post: freezed == post
+          ? _value.post
+          : post // ignore: cast_nullable_to_non_nullable
+              as PostDto?,
     ) as $Val);
   }
 }
@@ -88,10 +85,7 @@ abstract class _$$HomeStateImplCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {bool isLoading,
-      Failure? failure,
-      List<ProductDto> products,
-      ProductDto? product});
+      {bool isLoading, Failure? failure, List<PostDto> posts, PostDto? post});
 }
 
 /// @nodoc
@@ -107,8 +101,8 @@ class __$$HomeStateImplCopyWithImpl<$Res>
   $Res call({
     Object? isLoading = null,
     Object? failure = freezed,
-    Object? products = null,
-    Object? product = freezed,
+    Object? posts = null,
+    Object? post = freezed,
   }) {
     return _then(_$HomeStateImpl(
       isLoading: null == isLoading
@@ -119,14 +113,14 @@ class __$$HomeStateImplCopyWithImpl<$Res>
           ? _value.failure
           : failure // ignore: cast_nullable_to_non_nullable
               as Failure?,
-      products: null == products
-          ? _value._products
-          : products // ignore: cast_nullable_to_non_nullable
-              as List<ProductDto>,
-      product: freezed == product
-          ? _value.product
-          : product // ignore: cast_nullable_to_non_nullable
-              as ProductDto?,
+      posts: null == posts
+          ? _value._posts
+          : posts // ignore: cast_nullable_to_non_nullable
+              as List<PostDto>,
+      post: freezed == post
+          ? _value.post
+          : post // ignore: cast_nullable_to_non_nullable
+              as PostDto?,
     ));
   }
 }
@@ -137,9 +131,9 @@ class _$HomeStateImpl implements _HomeState {
   const _$HomeStateImpl(
       {this.isLoading = false,
       this.failure,
-      final List<ProductDto> products = const [],
-      this.product})
-      : _products = products;
+      final List<PostDto> posts = const [],
+      this.post})
+      : _posts = posts;
 
   @override
   @JsonKey()
@@ -148,23 +142,23 @@ class _$HomeStateImpl implements _HomeState {
   final Failure? failure;
 
   ///
-  final List<ProductDto> _products;
+  final List<PostDto> _posts;
 
   ///
   @override
   @JsonKey()
-  List<ProductDto> get products {
-    if (_products is EqualUnmodifiableListView) return _products;
+  List<PostDto> get posts {
+    if (_posts is EqualUnmodifiableListView) return _posts;
     // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(_products);
+    return EqualUnmodifiableListView(_posts);
   }
 
   @override
-  final ProductDto? product;
+  final PostDto? post;
 
   @override
   String toString() {
-    return 'HomeState(isLoading: $isLoading, failure: $failure, products: $products, product: $product)';
+    return 'HomeState(isLoading: $isLoading, failure: $failure, posts: $posts, post: $post)';
   }
 
   @override
@@ -175,13 +169,13 @@ class _$HomeStateImpl implements _HomeState {
             (identical(other.isLoading, isLoading) ||
                 other.isLoading == isLoading) &&
             (identical(other.failure, failure) || other.failure == failure) &&
-            const DeepCollectionEquality().equals(other._products, _products) &&
-            (identical(other.product, product) || other.product == product));
+            const DeepCollectionEquality().equals(other._posts, _posts) &&
+            (identical(other.post, post) || other.post == post));
   }
 
   @override
   int get hashCode => Object.hash(runtimeType, isLoading, failure,
-      const DeepCollectionEquality().hash(_products), product);
+      const DeepCollectionEquality().hash(_posts), post);
 
   @JsonKey(ignore: true)
   @override
@@ -194,8 +188,8 @@ abstract class _HomeState implements HomeState {
   const factory _HomeState(
       {final bool isLoading,
       final Failure? failure,
-      final List<ProductDto> products,
-      final ProductDto? product}) = _$HomeStateImpl;
+      final List<PostDto> posts,
+      final PostDto? post}) = _$HomeStateImpl;
 
   @override
   bool get isLoading;
@@ -204,9 +198,9 @@ abstract class _HomeState implements HomeState {
   @override
 
   ///
-  List<ProductDto> get products;
+  List<PostDto> get posts;
   @override
-  ProductDto? get product;
+  PostDto? get post;
   @override
   @JsonKey(ignore: true)
   _$$HomeStateImplCopyWith<_$HomeStateImpl> get copyWith =>

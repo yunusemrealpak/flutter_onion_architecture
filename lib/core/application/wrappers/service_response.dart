@@ -23,10 +23,10 @@ class ServiceResponse<T> {
   });
 
   /// Creates a successful [ServiceResponse] with the given [data].
-  ServiceResponse.success(this.data) : failure = null;
+  ServiceResponse.success(T data) : this(data: data, failure: null);
 
   /// Creates a failed [ServiceResponse] with the given [failure].
-  ServiceResponse.failure(this.failure) : data = null;
+  ServiceResponse.failure(Failure failure) : this(data: null, failure: failure);
 
   /// Returns `true` if the [ServiceResponse] contains data, `false` otherwise.
   bool get hasData => data != null;

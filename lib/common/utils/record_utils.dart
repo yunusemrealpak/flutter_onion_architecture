@@ -11,6 +11,9 @@ extension RecordExtension<L, R> on (L?, R?) {
       return left(this.$1);
     }
   }
+
+  L get left => this.$1 as L;
+  R get right => this.$2 as R;
 }
 
 /// Creates a pair with the first value set to `null` and the second value set to the provided `right` value.

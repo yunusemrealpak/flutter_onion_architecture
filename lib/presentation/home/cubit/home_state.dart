@@ -2,7 +2,7 @@ import 'package:busenet/busenet.dart';
 import 'package:flutter_onion_architecture/presentation/common/base_cubit_state.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
-import '../../../core/application/dto/product_dto.dart';
+import '../../../core/application/dto/post_dto.dart';
 
 part 'home_state.freezed.dart';
 
@@ -13,8 +13,8 @@ class HomeState extends BaseCubitState with _$HomeState {
     Failure? failure,
 
     ///
-    @Default([]) List<ProductDto> products,
-    ProductDto? product,
+    @Default([]) List<PostDto> posts,
+    PostDto? post,
   }) = _HomeState;
   factory HomeState.initial() => const HomeState();
 }

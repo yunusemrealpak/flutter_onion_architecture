@@ -6,13 +6,14 @@ import 'package:injectable/injectable.dart';
 
 import '../../../common/config/app_config.dart';
 import '../../../common/env/env.dart';
+import 'i_app_network_manager.dart';
 import 'model/response_model.dart';
 
 @singleton
 
 /// A class that manages network operations for the application.
 /// It provides methods for fetching data, downloading files, and managing headers.
-class AppNetworkManager {
+class AppNetworkManager implements IAppNetworkManager {
   late final INetworkManager<ResponseModel> _manager;
 
   /// Creates an instance of [AppNetworkManager] with the given [_manager].
@@ -40,6 +41,7 @@ class AppNetworkManager {
   /// Fetches data from the network using the [_manager]'s [fetch] method.
   /// It requires a [path] to specify the API endpoint and a [parserModel] to parse the response.
   /// Other optional parameters can be provided for customization.
+  @override
   Future<ResponseModel> fetch<T extends BaseEntity<T>, R>(
     String path, {
     required T parserModel,
@@ -77,6 +79,7 @@ class AppNetworkManager {
   /// Fetches primitive data from the network using the [_manager]'s [fetchPrimitive] method.
   /// It requires a [path] to specify the API endpoint.
   /// Other optional parameters can be provided for customization.
+  @override
   Future<ResponseModel> fetchPrimitive<T, R>(
     String path, {
     required HttpTypes type,
@@ -112,6 +115,7 @@ class AppNetworkManager {
   /// Downloads a file from the network using the [_manager]'s [downloadFile] method.
   /// It requires a [urlPath] to specify the file URL.
   /// Other optional parameters can be provided for customization.
+  @override
   Future<File> downloadFile(
     String urlPath, {
     void Function(int, int)? onReceiveProgress,
@@ -131,6 +135,7 @@ class AppNetworkManager {
   }
 
   /// Waits for the network manager to initialize by waiting for the [initializeCompleter] to complete.
+  @override
   Future<void> get waitForManagerInitialization async {
     if (!initializeCompleter.isCompleted) {
       await initializeCompleter.future;
@@ -138,12 +143,14 @@ class AppNetworkManager {
   }
 
   /// Changes the language header of the network manager to the specified [langCode].
+  @override
   void changeLangHeader(String langCode) {
     _manager.removeHeader('Lang');
     _manager.addHeader({'Lang': langCode});
   }
 
   /// Adds an authorization header to the network manager with the specified [token].
+  @override
   void addAuthorizationHeader(String token) {
     _manager.removeAuthorizationHeader();
     _manager.addAuthorizationHeader(token);

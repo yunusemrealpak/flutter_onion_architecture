@@ -1,19 +1,19 @@
 import 'package:auto_mappr_annotation/auto_mappr_annotation.dart';
-import 'package:flutter_onion_architecture/core/application/dto/product_dto.dart';
-import 'package:flutter_onion_architecture/core/application/features/product/commands/create_product/create_product_command.dart';
-import 'package:flutter_onion_architecture/core/domain/entities/product.dart';
+import 'package:flutter_onion_architecture/core/application/dto/post_dto.dart';
+import 'package:flutter_onion_architecture/core/application/features/post/commands/create_post/create_post_command.dart';
+import 'package:flutter_onion_architecture/core/domain/entities/post.dart';
 import 'package:injectable/injectable.dart';
 
 import 'auto_mapper.auto_mappr.dart';
 
 @AutoMappr([
-  MapType<CreateProductCommand, Product>(
+  MapType<CreatePostCommand, Post>(
     fields: [
       Field('title', from: 'description'),
     ],
   ),
-  MapType<Product, ProductDto>(),
-  MapType<ProductDto, Product>(),
+  MapType<Post, PostDto>(),
+  MapType<PostDto, Post>(),
 ])
 @singleton
-final class AutoMapper extends $AutoMapper {}
+class AutoMapper extends $AutoMapper {}
