@@ -10,7 +10,10 @@ import 'package:mediatr/mediatr.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
+  // Initialize the dependencies
   GetItContainer.configureDependencies();
+
+  // Subscribe the MediatorInjector to the GetItContainer instance
   MediatorInjector().subscribe(GetItContainer.instance);
   runApp(const MyApp());
 }
