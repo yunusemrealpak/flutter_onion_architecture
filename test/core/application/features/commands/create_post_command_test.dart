@@ -13,7 +13,6 @@ import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
 
 import '../../../../infrastructure/repositories/network/mock_app_network_manager.dart';
-
 import 'create_post_command_test.mocks.dart';
 
 @GenerateMocks([AutoMapper])
@@ -33,9 +32,7 @@ void main() {
   test('should create product', () async {
     // arrange
     final command = CreatePostCommand(
-      name: 'product name',
-      price: 100,
-      stock: 10,
+      body: 'product name',
       title: 'product title',
     );
     when(mapper.convert(command)).thenReturn(Post.initial());
@@ -51,7 +48,7 @@ void main() {
   test('should return validation exception', () async {
     // arrange
     final command = CreatePostCommand(
-      name: '',
+      body: '',
       title: '',
     );
 
@@ -66,12 +63,13 @@ void main() {
   test('should return error not found', () async {
     // arrange
     final command = CreatePostCommand(
-      name: 'Post 1',
+      body: 'Post 1',
       title: 'Post 1',
     );
     when(mapper.convert(command)).thenReturn(Post.initial());
     when(mapper.convert(const Post())).thenReturn(PostDto());
-    mockAppNetworkManager.setReturnFailure(true, NotFoundFailure(message: 'NotFoundFailure'));
+    mockAppNetworkManager.setReturnFailure(
+        true, NotFoundFailure(message: 'NotFoundFailure'));
 
     // act
     final result = await handler.handle(command);
