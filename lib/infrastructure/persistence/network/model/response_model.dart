@@ -6,10 +6,10 @@ import 'package:injectable/injectable.dart';
 
 /// ResponseModel class represents the response model used in the network layer.
 /// It extends the BaseResponse class and contains properties such as entity, error, success, message, and status.
-@singleton
-class ResponseModel extends BaseResponse<ResponseModel> {
-  dynamic entity;
-  dynamic error;
+@injectable
+class ResponseModel<T> extends BaseResponse<ResponseModel> {
+  Object? entity;
+  Object? error;
   bool success;
   String? message;
   int? status;

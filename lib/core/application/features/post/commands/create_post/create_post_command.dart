@@ -3,21 +3,17 @@ import 'package:flutter_onion_architecture/core/application/wrappers/service_res
 import 'package:mediatr/mediatr.dart';
 
 final class CreatePostCommand extends IRequest<ServiceResponse<PostDto>> {
-  final String name;
-  final double stock;
+  final String body;
   final String title;
-  final double price;
 
   CreatePostCommand({
-    required this.name,
+    required this.body,
     required this.title,
-    this.stock = 0.0,
-    this.price = 0.0,
   });
 
   @override
   (bool, String?) hasValidate() {
-    if (name.isEmpty) {
+    if (body.isEmpty) {
       return (false, 'Name is required');
     }
 

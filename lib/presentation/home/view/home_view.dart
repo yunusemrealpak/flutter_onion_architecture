@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 import '../../common/base_view.dart';
 import '../cubit/home_cubit.dart';
@@ -16,19 +17,23 @@ class HomeView extends StatelessWidget {
       },
       builder: (context, HomeCubit cubit, HomeState state) {
         return Scaffold(
+          extendBodyBehindAppBar: true,
           appBar: AppBar(
-            title: const Text(''),
+            elevation: 0,
+            backgroundColor: Colors.transparent,
+            scrolledUnderElevation: 0,
+            systemOverlayStyle: SystemUiOverlayStyle.dark,
           ),
-          body: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              ElevatedButton(
-                onPressed: () {
-                  cubit.createProduct();
-                },
-                child: const Text('Create Product'),
-              ),
-            ],
+          body: ListView.separated(
+            itemCount: state.posts.length,
+            itemBuilder: (context, index) {
+              final post = state.posts[index];
+              return ListTile(
+                title: Text(post.title ?? ''),
+                subtitle: Text(post.body ?? ''),
+              );
+            },
+            separatorBuilder: (context, index) => const Divider(),
           ),
         );
       },

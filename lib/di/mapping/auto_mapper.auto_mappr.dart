@@ -80,16 +80,23 @@ class $AutoMapper implements _i1.AutoMapprInterface {
   /// {@macro AutoMapprInterface:tryConvert}
   /// {@macro package:flutter_onion_architecture/di/mapping/auto_mapper.dart}
   @override
-  TARGET? tryConvert<SOURCE, TARGET>(SOURCE? model) {
+  TARGET? tryConvert<SOURCE, TARGET>(
+    SOURCE? model, {
+    void Function(Object error, StackTrace stackTrace, SOURCE? source)?
+        onMappingError,
+  }) {
     if (canConvert<SOURCE, TARGET>(recursive: false)) {
-      return _convert(
+      return _safeConvert(
         model,
-        canReturnNull: true,
+        onMappingError: onMappingError,
       );
     }
     for (final mappr in _delegates) {
       if (mappr.canConvert<SOURCE, TARGET>()) {
-        return mappr.tryConvert(model);
+        return mappr.tryConvert(
+          model,
+          onMappingError: onMappingError,
+        );
       }
     }
 
@@ -119,13 +126,20 @@ class $AutoMapper implements _i1.AutoMapprInterface {
   /// {@macro package:flutter_onion_architecture/di/mapping/auto_mapper.dart}
   @override
   Iterable<TARGET?> tryConvertIterable<SOURCE, TARGET>(
-      Iterable<SOURCE?> model) {
+    Iterable<SOURCE?> model, {
+    void Function(Object error, StackTrace stackTrace, SOURCE? source)?
+        onMappingError,
+  }) {
     if (canConvert<SOURCE, TARGET>(recursive: false)) {
-      return model.map<TARGET?>((item) => _convert(item, canReturnNull: true));
+      return model.map<TARGET?>(
+          (item) => _safeConvert(item, onMappingError: onMappingError));
     }
     for (final mappr in _delegates) {
       if (mappr.canConvert<SOURCE, TARGET>()) {
-        return mappr.tryConvertIterable(model);
+        return mappr.tryConvertIterable(
+          model,
+          onMappingError: onMappingError,
+        );
       }
     }
 
@@ -154,13 +168,23 @@ class $AutoMapper implements _i1.AutoMapprInterface {
   ///
   /// {@macro package:flutter_onion_architecture/di/mapping/auto_mapper.dart}
   @override
-  List<TARGET?> tryConvertList<SOURCE, TARGET>(Iterable<SOURCE?> model) {
+  List<TARGET?> tryConvertList<SOURCE, TARGET>(
+    Iterable<SOURCE?> model, {
+    void Function(Object error, StackTrace stackTrace, SOURCE? source)?
+        onMappingError,
+  }) {
     if (canConvert<SOURCE, TARGET>(recursive: false)) {
-      return tryConvertIterable<SOURCE, TARGET>(model).toList();
+      return tryConvertIterable<SOURCE, TARGET>(
+        model,
+        onMappingError: onMappingError,
+      ).toList();
     }
     for (final mappr in _delegates) {
       if (mappr.canConvert<SOURCE, TARGET>()) {
-        return mappr.tryConvertList(model);
+        return mappr.tryConvertList(
+          model,
+          onMappingError: onMappingError,
+        );
       }
     }
 
@@ -189,13 +213,23 @@ class $AutoMapper implements _i1.AutoMapprInterface {
   ///
   /// {@macro package:flutter_onion_architecture/di/mapping/auto_mapper.dart}
   @override
-  Set<TARGET?> tryConvertSet<SOURCE, TARGET>(Iterable<SOURCE?> model) {
+  Set<TARGET?> tryConvertSet<SOURCE, TARGET>(
+    Iterable<SOURCE?> model, {
+    void Function(Object error, StackTrace stackTrace, SOURCE? source)?
+        onMappingError,
+  }) {
     if (canConvert<SOURCE, TARGET>(recursive: false)) {
-      return tryConvertIterable<SOURCE, TARGET>(model).toSet();
+      return tryConvertIterable<SOURCE, TARGET>(
+        model,
+        onMappingError: onMappingError,
+      ).toSet();
     }
     for (final mappr in _delegates) {
       if (mappr.canConvert<SOURCE, TARGET>()) {
-        return mappr.tryConvertSet(model);
+        return mappr.tryConvertSet(
+          model,
+          onMappingError: onMappingError,
+        );
       }
     }
 
@@ -239,6 +273,35 @@ class $AutoMapper implements _i1.AutoMapprInterface {
     throw Exception('No ${model.runtimeType} -> $targetTypeOf mapping.');
   }
 
+  TARGET? _safeConvert<SOURCE, TARGET>(
+    SOURCE? model, {
+    void Function(Object error, StackTrace stackTrace, SOURCE? source)?
+        onMappingError,
+  }) {
+    if (!useSafeMapping<SOURCE, TARGET>()) {
+      return _convert(
+        model,
+        canReturnNull: true,
+      );
+    }
+    try {
+      return _convert(
+        model,
+        canReturnNull: true,
+      );
+    } catch (e, s) {
+      onMappingError?.call(e, s, model);
+      return null;
+    }
+  }
+
+  /// {@macro AutoMapprInterface:useSafeMapping}
+  /// {@macro package:flutter_onion_architecture/di/mapping/auto_mapper.dart}
+  @override
+  bool useSafeMapping<SOURCE, TARGET>() {
+    return false;
+  }
+
   _i3.Post _map__i2$CreatePostCommand_To__i3$Post(
       _i2.CreatePostCommand? input) {
     final model = input;
@@ -247,7 +310,10 @@ class $AutoMapper implements _i1.AutoMapprInterface {
           r'Mapping CreatePostCommand → Post failed because CreatePostCommand was null, and no default value was provided. '
           r'Consider setting the whenSourceIsNull parameter on the MapType<CreatePostCommand, Post> to handle null values during mapping.');
     }
-    return _i3.Post();
+    return _i3.Post(
+      title: model.title,
+      body: model.body,
+    );
   }
 
   _i4.PostDto _map__i3$Post_To__i4$PostDto(_i3.Post? input) {

@@ -9,7 +9,7 @@ import '../../../common/env/env.dart';
 import 'i_app_network_manager.dart';
 import 'model/response_model.dart';
 
-@singleton
+@Singleton(as: IAppNetworkManager)
 
 /// A class that manages network operations for the application.
 /// It provides methods for fetching data, downloading files, and managing headers.

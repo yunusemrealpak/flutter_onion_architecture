@@ -5,15 +5,17 @@ import 'package:flutter_onion_architecture/core/domain/entities/product.dart';
 import 'package:flutter_onion_architecture/infrastructure/persistence/network/app_network_manager.dart';
 import 'package:injectable/injectable.dart';
 
+import '../../../common/extensions/generic_repo_method.dart';
 import 'generic_repository.dart';
 
 @LazySingleton(as: IProductRepository)
-final class ProductRepository extends GenericRepository<Product> implements IProductRepository {
+final class ProductRepository extends GenericRepository<Product>
+    implements IProductRepository {
   AppNetworkManager manager;
   ProductRepository(this.manager)
       : super(manager, parserModel: Product(), networkPaths: {
-          "getAll": "/api/product/getAll",
-          "getById": "/api/product/getById",
+          GenericRepoMethod.getAll: "/api/product/getAll",
+          GenericRepoMethod.getById: "/api/product/getById",
         });
 
   @override

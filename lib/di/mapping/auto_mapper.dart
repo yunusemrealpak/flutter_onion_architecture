@@ -7,11 +7,7 @@ import 'package:injectable/injectable.dart';
 import 'auto_mapper.auto_mappr.dart';
 
 @AutoMappr([
-  MapType<CreatePostCommand, Post>(
-    fields: [
-      Field('title', from: 'description'),
-    ],
-  ),
+  MapType<CreatePostCommand, Post>(),
   MapType<Post, PostDto>(),
   MapType<PostDto, Post>(),
 ])

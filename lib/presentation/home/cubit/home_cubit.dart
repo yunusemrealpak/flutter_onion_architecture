@@ -19,7 +19,8 @@ class HomeCubit extends BaseCubit<HomeState> {
   /// Finally, the loading state is updated to false.
   Future<void> init() async {
     setLoading(true);
-    final response = await _mediator.send<GetAllProductQuery, ServiceResponse<List<PostDto>>>(
+    final response = await _mediator
+        .send<GetAllProductQuery, ServiceResponse<List<PostDto>>>(
       GetAllProductQuery(),
     );
     setLoading(false);
@@ -45,10 +46,10 @@ class HomeCubit extends BaseCubit<HomeState> {
   /// ```
   Future<void> createProduct() async {
     setLoading(true);
-    final response = await _mediator.send<CreatePostCommand, ServiceResponse<PostDto>>(
+    final response =
+        await _mediator.send<CreatePostCommand, ServiceResponse<PostDto>>(
       CreatePostCommand(
-        name: 'Product 1',
-        price: 1000,
+        body: 'Product 1',
         title: 'Description 1',
       ),
     );
